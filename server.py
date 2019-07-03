@@ -8,6 +8,7 @@ class Handler(socketserver.BaseRequestHandler):
     def handle(self):
         global state
         self.data = self.request.recv(1024).strip().decode("utf-8")
+        print("Received " + self.data)
         if self.data == "STATE":
             self.request.sendall(bytes(state, "utf-8"))
         else:
@@ -28,4 +29,5 @@ class Handler(socketserver.BaseRequestHandler):
 
 if __name__ == "__main__":
     with socketserver.TCPServer(("localhost", 7000), Handler) as server:
+        print("Server started")
         server.serve_forever()
