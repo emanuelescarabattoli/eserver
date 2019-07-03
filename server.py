@@ -25,7 +25,7 @@ class Handler(socketserver.BaseRequestHandler):
                     new_stauts += device_data[0] + "#" + device_data[1] + ";"
             new_stauts = new_stauts[:-1]
             state = new_stauts
-            self.request.sendall(bytes("DONE", "utf-8"))
+            self.request.sendall(bytes(state, "utf-8"))
 
 if __name__ == "__main__":
     with socketserver.TCPServer(("localhost", 7000), Handler) as server:
